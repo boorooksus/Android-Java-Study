@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     Switch sw;
     ImageView image;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         editText = findViewById(R.id.editTextNumberSigned);
         sw = findViewById(R.id.switch1);
         image = findViewById(R.id.imageView);
+        progressBar = findViewById(R.id.progressBar);
 
         button.setOnClickListener(new View.OnClickListener(){
             @SuppressLint("SetTextI18n")
@@ -42,12 +45,16 @@ public class MainActivity extends AppCompatActivity {
                     double f = 9 / 5.0 * c + 32;
                     textView.setText("" + f);
                     image.setImageResource(R.drawable.java);
+                    progressBar.setMax(100);
+                    progressBar.setProgress((int)f);
                 }
                 else{
 
                     double f = (c - 32) * 5.0 / 9;
                     textView.setText("" + f);
                     image.setImageResource((R.drawable.android));
+                    progressBar.setMax(212);
+                    progressBar.setProgress((int)f);
                 }
 
             }
