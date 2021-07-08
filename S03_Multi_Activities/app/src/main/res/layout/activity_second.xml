@@ -14,4 +14,10 @@
         android:layout_height="wrap_content"
         android:onClick="backHandler"
         android:text="Back to Main" />
+
+    <Button
+        android:id="@+id/buttonWeb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to web" />
 </LinearLayout>
