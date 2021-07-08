@@ -38,17 +38,17 @@
         android:checked="true"
         android:text="F->C" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="463dp"
-        android:scaleType="fitStart"
-        app:srcCompat="@drawable/android" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:text="Convert" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="463dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/android" />
 
 </LinearLayout>
