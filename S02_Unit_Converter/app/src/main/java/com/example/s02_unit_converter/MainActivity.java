@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -16,9 +18,10 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     TextView textView;
     Button button;
-    Switch sw;
     ImageView image;
-    ProgressBar progressBar;
+    RadioGroup radioGroup;
+    int radioButton;
+    int minRadioId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,35 +31,49 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         button = findViewById(R.id.button);
         editText = findViewById(R.id.editTextNumberSigned);
-        sw = findViewById(R.id.switch1);
         image = findViewById(R.id.imageView);
-        progressBar = findViewById(R.id.progressBar);
+        radioGroup = findViewById(R.id.radioGroup);
+        minRadioId = radioGroup.getCheckedRadioButtonId();
 
         button.setOnClickListener(new View.OnClickListener(){
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view){
                 String strC = editText.getText().toString();
-                double c = Double.parseDouble(strC);
 
-                if (strC.equals(""))
-                    return;
-                if(sw.isChecked()){
-                    double f = 9 / 5.0 * c + 32;
-                    textView.setText("" + f);
-                    image.setImageResource(R.drawable.java);
-                    progressBar.setMax(100);
-                    progressBar.setProgress((int)f);
+                if (!strC.equals("")) {
+                    double c = Double.parseDouble(strC);
+
+                    radioButton = radioGroup.getCheckedRadioButtonId();
+
+                    if (radioButton == minRadioId){
+                        double f = 9 / 5.0 * c + 32;
+                        textView.setText("" + f);
+                        image.setImageResource(R.drawable.java);
+                    }
+                    else if (radioButton == minRadioId + 1){
+                        double f = (c - 32) * 5.0 / 9;
+                        textView.setText("" + f);
+                        image.setImageResource(R.drawable.java);
+                    }
+                    else if (radioButton == minRadioId + 2){
+                        double f = c * 0.3937007874;
+                        textView.setText("" + f);
+                    }
+                    else if (radioButton == minRadioId + 3){
+                        double f = c * 2.54;
+                        textView.setText("" + f);
+                    }
+                    else if (radioButton == minRadioId + 4){
+                        double f = c * 2.2046;
+                        textView.setText("" + f);
+                    }
+                    else if (radioButton == minRadioId + 5){
+                        double f = c * 0.45359;
+                        textView.setText("" + f);
+                    }
+
                 }
-                else{
-
-                    double f = (c - 32) * 5.0 / 9;
-                    textView.setText("" + f);
-                    image.setImageResource((R.drawable.android));
-                    progressBar.setMax(212);
-                    progressBar.setProgress((int)f);
-                }
-
             }
 
         });
