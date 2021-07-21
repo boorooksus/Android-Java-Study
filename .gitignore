@@ -14,3 +14,5 @@
 .cxx
 
 /IpAddress.java
+/MouseRemoteController/Client/app/src/main/java/com/example/client/IpAddress.java
+/MouseRemoteController/Server/src/IpAddress.java

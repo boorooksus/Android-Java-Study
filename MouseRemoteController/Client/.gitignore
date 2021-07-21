@@ -12,3 +12,7 @@
 /captures
 .externalNativeBuild
 .cxx
+
+/IpAddress.java
+/app/src/main/java/com/example/client/IpAddress.java
+
