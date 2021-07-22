@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
     Button buttonRightClick;
     int posX;
     int posY;
-//    boolean isLeftClick = false;
-//    boolean isRightClick = false;
-    int clickedButton;
+    int clickedButton;  // 클릭할 버튼 종류. 1: 좌클릭, 3: 우클릭
 
     class NetworkThread extends Thread{
+        // 보낼 내용 타입.
+        // 0: 커서 움직임 정보, 1: 클릭 정보
         private int networkType;
 
         public void setNetworkType(int networkType){
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-
+                // ip address 정보 객체 생성
                 IpAddress ipAddress = new IpAddress();
 
                 Socket socket = new Socket(ipAddress.getIpAddress(), 5000);
@@ -44,28 +44,22 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("y: " + (posY - 800));
 
                 if(networkType == 0){
+                    // 마우스 움직이는 경우, int 데이터 3개 보냄
                     dos.writeInt(0);
                     dos.writeInt(posX);
                     dos.writeInt(posY - 800);
                 }
                 else{
+                    // 마우스 클릭인 경우, int 데이터 2개 보냄
                     dos.writeInt(1);
                     dos.writeInt(clickedButton);
-//                    dos.writeBoolean(isLeftClick);
-//                    dos.writeBoolean(isRightClick);
-
                 }
-
-
-
                 socket.close();
-
             } catch (Exception e) {
                 System.out.println("================ Error =====================");
                 e.printStackTrace();
             }
         }
-
     }
 
     @Override
@@ -73,14 +67,11 @@ public class MainActivity extends AppCompatActivity {
         posX = (int)event.getX();
         posY = (int)event.getY();
 
-        if(posX > 0 && posY > 0){
+        if(posX >= 0 && posY >= 0){
             NetworkThread thread = new NetworkThread();
             thread.setNetworkType(0);
             thread.start();
-
         }
-
-
         return super.onTouchEvent(event);
     }
 
@@ -95,12 +86,6 @@ public class MainActivity extends AppCompatActivity {
         buttonLeftClick.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                isLeftClick = !isLeftClick;
-//                if (isLeftClick){
-//                    buttonLeftClick.setBackgroundColor(Color.parseColor("#282828"));
-//                } else{
-//                    buttonLeftClick.setBackgroundColor(Color.parseColor("#828282"));
-//                }
                 clickedButton = 1;
 
                 NetworkThread thread = new NetworkThread();
@@ -112,13 +97,6 @@ public class MainActivity extends AppCompatActivity {
         buttonRightClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                isRightClick = !isRightClick;
-//                if (isRightClick){
-//                    buttonRightClick.setBackgroundColor(Color.parseColor("#282828"));
-//                } else{
-//                    buttonRightClick.setBackgroundColor(Color.parseColor("#828282"));
-//                }
-
                 clickedButton = 3;
 
                 NetworkThread thread = new NetworkThread();
